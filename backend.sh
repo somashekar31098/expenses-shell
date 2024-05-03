@@ -49,7 +49,6 @@ fi
 mkdir -p /app &>>LOGFILE
 Validate $? "CREATING APP DIRECTORY"
 
-rm -rf /app
 curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>>LOGFILE
 Validate $? "COPYING ZIP FILE"
 
