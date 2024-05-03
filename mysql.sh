@@ -7,6 +7,8 @@ LOGFILE=/tmp/$SCRIPT_NAME-$TIMESTAMP.log
 R="\e[31m"
 G="\e[32m"
 N="\e[0m"
+echo "please provide db password"
+read  mysql_root_password
 
 Validate(){
     if [ $1 -ne 0 ]
@@ -26,23 +28,24 @@ else
    echo "you are super user"
 fi
 
-dnf install mysql-server -y
+dnf install mysql-server -y &>>LOGFILE
 Validate $? "installing MYSQL-SERVER"
 
-systemctl enable mysqld
+systemctl enable mysqld &>>LOGFILE
 Validate $? "enabling MYSQL"
 
-systemctl start mysqld
+systemctl start mysqld &>>LOGFILE
 Validate $? "STARTING MYSQL"
 
 # mysql_secure_installation --set-root-pass ExpenseApp@1
 # Validate $? "SETTING ROOT PASSWORD OF MYSQL"
 
 #idempotancy nature code
- mysql -h db.daws1998.online -u root -pExpenseApp@1 -e 'SHOW DATABASES;'
+ mysql -h db.daws1998.online -u root ${mysql_root_password}
+ -e 'SHOW DATABASES;'
  if [ $? -ne 0]
    then 
-      mysql_secure_installation --set-root-pass ExpenseApp@1
+      mysql_secure_installation --set-root-pass ${mysql_root_password} &>>LOGFILE
       Validate $? "root password setup"
    else
       echo -e " root password already setup .... $G SKIPPING $N"     
