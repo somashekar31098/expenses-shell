@@ -35,5 +35,15 @@ Validate $? "enabling MYSQL"
 systemctl start mysqld
 Validate $? "STARTING MYSQL"
 
-mysql_secure_installation --set-root-pass ExpenseApp@1
-Validate $? "SETTING ROOT PASSWORD OF MYSQL"
+# mysql_secure_installation --set-root-pass ExpenseApp@1
+# Validate $? "SETTING ROOT PASSWORD OF MYSQL"
+
+#idempotancy nature code
+ mysql -h db.daws1998.online -u root -pExpenseApp@1 -e 'SHOW DATABASES;'
+ if [ $? -ne 0]
+   then 
+      mysql_secure_installation --set-root-pass ExpenseApp@1
+      Validate $? "root password setup"
+   else
+      echo " root password already setup .... $G SKIPPING $N"     
+fi 
