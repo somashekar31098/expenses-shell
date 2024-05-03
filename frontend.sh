@@ -25,13 +25,13 @@ else
 fi
 
 dnf install nginx -y &>>LOGFILE
-Validate $? "installing nginz" 
+Validate $? "installing nginx" 
 
 systemctl enable nginx &>>LOGFILE
-Validate $? "ENABLING nginz" 
+Validate $? "ENABLING nginx" 
 
 systemctl start nginx &>>LOGFILE
-Validate $? "STARTING nginz" 
+Validate $? "STARTING nginx" 
  
 rm -rf /usr/share/nginx/html/* &>>LOGFILE
 Validate $? "REMOVING EXISTING FILES " 
