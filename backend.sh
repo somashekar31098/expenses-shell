@@ -46,7 +46,7 @@ if [ $? -ne 0 ]
      echo -e "user already exists....$G SKIPPING $N"
 fi
 
-mkdir -P /app &>>LOGFILE
+mkdir -p /app &>>LOGFILE
 Validate $? "CREATING APP DIRECTORY"
 
 rm -rf /app
