@@ -28,23 +28,23 @@ dnf install nginx -y &>>LOGFILE
 Validate $? "installing nginz" 
 
 systemctl enable nginx &>>LOGFILE
-Validate $? "installing nginz" 
+Validate $? "ENABLING nginz" 
 
 systemctl start nginx &>>LOGFILE
-Validate $? "installing nginz" 
+Validate $? "STARTING nginz" 
  
 rm -rf /usr/share/nginx/html/* &>>LOGFILE
-Validate $? "installing nginz" 
+Validate $? "REMOVING EXISTING FILES " 
 
 curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip &>>LOGFILE
-Validate $? "OPYING ZIP FILE" 
+Validate $? "DOWNLOADING FRONTEND CODE" 
 
 cd /usr/share/nginx/html 
  
 unzip /tmp/frontend.zip &>>LOGFILE
 Validate $? "unzipping the file" 
 
-vim /home/ec2-user/expenses-shell/expense.conf /etc/nginx/default.d/expense.conf &>>LOGFILE
+cp /home/ec2-user/expenses-shell/expense.conf /etc/nginx/default.d/expense.conf &>>LOGFILE
 Validate $? "copying ngnix dependencies" 
 
 systemctl restart nginx &>>LOGFILE
