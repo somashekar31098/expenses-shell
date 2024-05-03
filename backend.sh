@@ -42,5 +42,5 @@ if [ $? -ne 0 ]
      useradd expense
      Validate $? "creating expense user" 
    else 
-     echo "user already exists....$G SKIPPING $N"
+     echo -e "user already exists....$G SKIPPING $N"
 fi
